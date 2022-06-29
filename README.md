@@ -26,5 +26,5 @@ networkpolicies resources under extensions/v1beta1 - use networking.k8s.io/v1 in
 
 podsecuritypolicies resources under extensions/v1beta1 - use policy/v1beta1 instead
 
-make sure use to build after a change
+make sure use to build after a change.
 helm dependency build charts/hdfs-k8s
