@@ -119,6 +119,10 @@ metadata:
     chart: {{ template "hdfs-k8s.subchart" . }}
     release: {{ .Release.Name }}
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "hdfs-k8s.namenode.name" . }}
+      release: {{ .Release.Name }}
   serviceName: {{ template "hdfs-k8s.namenode.fullname" . }}
   replicas: 2
   template:
