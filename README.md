@@ -14,17 +14,14 @@ HDFS on Kubernetes.
 
 Most of the developers face this issue because most of the tutorials have old YAML files and the support for extensions/v1beta1 was removed in v1.16, hence while applying the YAML configuration using the kubectl command we get this issue.
 
-As per the official documentation of Kubernetes (Release notes - 1.16.0)
+HDFS can be easily deployed using a ready-made Helm chart provided here. The Helm chart provides HA as well as a simple HDFS setup. As of writing this article, I used Kubernetes version 1.20 and as such, I had to make certain modifications to the charts.
+Update the apiVersion for StatefulSets and DaemonSets as they are now in apps/v1
+Make sure you have dynamic provisioning enabled for your cluster. If not, then you need to create PersistantVolumes for the StatefulSets (that includes Journal, Zookeeper and Namenodes).
+In requirements.yaml file (inside hdfs-k8s directory), change the Zookeeper repository to https://charts.helm.sh/incubator and version to 2.1.6
+There was no option to update the storage class of Zookeeper inside values.yaml, so you can update that section as below.
 
-The following APIs are no longer served by default:
-
-All resources under apps/v1beta1 and apps/v1beta2 - use apps/v1 instead
-
-daemonsets, deployments, replicasets resources under extensions/v1beta1 - use apps/v1 instead
-
-networkpolicies resources under extensions/v1beta1 - use networking.k8s.io/v1 instead
-
-podsecuritypolicies resources under extensions/v1beta1 - use policy/v1beta1 instead
-
-make sure use to build after a change.
+helm dep update charts/hdfs-k8s/
 helm dependency build charts/hdfs-k8s
+
+//make sure there is noting with my-hdfs in kube
+helm install my-hdfs charts/hdfs-k8s
