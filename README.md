@@ -25,3 +25,13 @@ helm dependency build charts/hdfs-k8s
 
 //make sure there is noting with my-hdfs in kube
 helm install my-hdfs charts/hdfs-k8s
+
+HDFS on K8s stores the file data on the local disks of the K8s cluster nodes
+using K8s HostPath volumes. You may want to change the default locations. Set
+global.dataNodeHostPath to override the default value. Note the option
+takes a list in case you want to use multiple disks.
+
+```
+  $ helm install my-hdfs charts/hdfs-k8s  \
+      --set "global.dataNodeHostPath={/mnt/sda1/data0,/mnt/sda1/hdfs-data1}"
+```
