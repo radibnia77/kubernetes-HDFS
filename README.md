@@ -35,5 +35,5 @@ takes a list in case you want to use multiple disks.
   $ helm install my-hdfs charts/hdfs-k8s  \
       --set "global.dataNodeHostPath={/mnt/sda1/hdfs-data0,/mnt/sda1/hdfs-data1}"
 
-helm install my-hdfs charts/hdfs-k8s --set "global.dataNodeHostPath={/mnt/sda1/hdfs-data0}
+helm install my-hdfs charts/hdfs-k8s --set "global.dataNodeHostPath={/mnt/sda1/hdfs-data0}"
 ```
