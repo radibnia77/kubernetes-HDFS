@@ -1,0 +1,3 @@
+size: 10Gi
+path: /datanode-pv-a
+node: exxact4544531989
