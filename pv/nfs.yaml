@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv0001 
+spec:
+  capacity:
+    storage: 5Gi 
+  accessModes:
+  - ReadWriteMany
+  nfs: 
+    path: /mnt/nfd
+    server: 10.213.37.55 
+  persistentVolumeReclaimPolicy: Retain

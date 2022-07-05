@@ -1,0 +1,32 @@
+# here we are using labels and selectors to map pvc to pv
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfspvdb
+  labels: 
+    disktype: pgsql
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /nfsshare/pgsql
+    server: 172.16.2.5
+  persistentVolumeReclaimPolicy: Retain
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgsqldb-data
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      disktype: pgsql
+status: {}
