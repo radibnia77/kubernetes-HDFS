@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: exxact4544531989-sda
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem # Mount volume into Pod as a directory.
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/sda # Path to the directory this PV refers to.
+  nodeAffinity: # nodeAffinity is required when using local volumes.
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - exxact4544531989
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: exxact4544532476-sda
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem # Mount volume into Pod as a directory.
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/sda # Path to the directory this PV refers to.
+  nodeAffinity: # nodeAffinity is required when using local volumes.
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - exxact4544532476          
