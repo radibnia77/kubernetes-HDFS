@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx      
+        volumeMounts:
+        - mountPath: /home    
+          name: vol-postgres
+      affinity:               
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - exxact4544532476  
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      volumes:
+      - name: vol-postgres
+        hostPath:
+          path: /mnt/postgres
