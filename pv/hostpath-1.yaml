@@ -5,13 +5,22 @@ metadata:
   labels:
     type: local
 spec:
+  storageClassName: manual
   capacity:
     storage: 100Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/sda1/hdfs-data0"
-
+    path: "/mnt/sda/hdfs-data0"
+  nodeAffinity: # nodeAffinity is required when using local volumes.
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - exxact4544531989
+---
 
 apiVersion: v1
 kind: PersistentVolume
@@ -20,9 +29,18 @@ metadata:
   labels:
     type: local
 spec:
+  storageClassName: manual
   capacity:
     storage: 100Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/sda1/hdfs-data1"
+    path: "/mnt/sda/hdfs-data1"
+  nodeAffinity: # nodeAffinity is required when using local volumes.
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - exxact4544532476
