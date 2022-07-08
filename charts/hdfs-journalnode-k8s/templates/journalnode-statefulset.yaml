@@ -22,7 +22,7 @@ spec:
     app: {{ template "hdfs-k8s.journalnode.name" . }}
     release: {{ .Release.Name }}
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: {{ template "hdfs-k8s.journalnode.fullname" . }}
