@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: pv-hdfs-data0
   labels:
-    type: local
+    node: '55'
 spec:
   storageClassName: manual
   capacity:
@@ -27,7 +27,7 @@ kind: PersistentVolume
 metadata:
   name: pv-hdfs-data1
   labels:
-    type: local
+    node: '56'
 spec:
   storageClassName: manual
   capacity:
