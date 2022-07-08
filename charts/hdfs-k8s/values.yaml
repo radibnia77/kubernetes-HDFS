@@ -78,13 +78,13 @@ hdfs-namenode-k8s:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    # storageClass: "-"
+    storageClass: "manual"
 
     ## To choose a suitable persistent volume from available static volumes, selectors
     ## are used.
-    # selector:
-    #   matchLabels:
-    #     volume-type: hdfs-ssd
+    selector:
+      matchLabels:
+        node: '55'
 
     accessMode: ReadWriteOnce
 
