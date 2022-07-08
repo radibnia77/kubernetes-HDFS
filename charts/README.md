@@ -119,7 +119,8 @@ Then launch the main chart. Specify the chart release name say "my-hdfs",
 which will be the prefix of the K8s resource names for the HDFS components.
 
 ```
-  $ helm install -n my-hdfs charts/hdfs-k8s
+  $ helm dependency build charts/hdfs-k8s
+  $ helm install my-hdfs charts/hdfs-k8s
 ```
 
 Wait for all daemons to be ready. Note some daemons may restart themselves
