@@ -5,7 +5,9 @@ zookeeper:
   ## Configure Zookeeper resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources: ~
-
+  persistence:
+    storageClass: zk-manual
+    accessMode: ReadWriteMany
   ## The JVM heap size to allocate to Zookeeper
   env:
     ZK_HEAP_SIZE: 1G
@@ -84,7 +86,7 @@ hdfs-namenode-k8s:
     ## are used.
     selector:
       matchLabels:
-        node: '55'
+        node: '56'
 
     accessMode: ReadWriteOnce
 
@@ -99,7 +101,16 @@ hdfs-namenode-k8s:
   ## Node labels and tolerations for pod assignment
   nodeSelector: {}
   tolerations: []
-  affinity: {}
+  affinity: 
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - exxact4544532476
+
 
 ## ------------------------------------------------------------------------------
 ## hdfs-simple-namenode-k8s:
@@ -175,7 +186,7 @@ global:
   ## In a command line, the list should be enclosed in '{' and '}'.
   ## e.g. --set "dataNodeHostPath={/hdfs-data,/hdfs-data1}"
   dataNodeHostPath:
-    - /hdfs-data
+    - /mnt/hdfs-data
 
   ## Parameters for determining which Unix user and group IDs to use in pods.
   ## Persistent volume permission may need to match these.
@@ -185,7 +196,7 @@ global:
     fsGroup: 1000
 
   ## Whether or not to expect namenodes in the HA setup.
-  namenodeHAEnabled: true
+  namenodeHAEnabled: false
 
   ## The number of zookeeper server to have in the quorum.
   ## This should match zookeeper.replicaCount above. Used only when
@@ -200,10 +211,10 @@ global:
 
   ## How many journal nodes to launch as a quorum. Used only when
   ## namenodeHAEnabled is set.
-  journalnodeQuorumSize: 3
+  journalnodeQuorumSize: 1
 
   ## Whether or not to enable default affinity setting.
-  defaultAffinityEnabled: true
+  defaultAffinityEnabled: false
 
   ## Whether or not Kerberos support is enabled.
   kerberosEnabled: false
