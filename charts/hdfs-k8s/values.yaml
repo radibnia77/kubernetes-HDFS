@@ -5,6 +5,8 @@ zookeeper:
   ## Configure Zookeeper resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources: ~
+  
+  # we have 3 pvs with this class.
   persistence:
     storageClass: zk-manual
     accessMode: ReadWriteMany
