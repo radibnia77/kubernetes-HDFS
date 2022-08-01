@@ -15,7 +15,7 @@ zookeeper:
     ZK_HEAP_SIZE: 1G
 
   ## The number of zookeeper server to have in the quorum.
-  replicaCount: 3
+  replicaCount: 1
 
 ## ------------------------------------------------------------------------------
 ## hdfs-config-k8s:
@@ -198,12 +198,12 @@ global:
     fsGroup: 1000
 
   ## Whether or not to expect namenodes in the HA setup.
-  namenodeHAEnabled: false
+  namenodeHAEnabled: true
 
   ## The number of zookeeper server to have in the quorum.
   ## This should match zookeeper.replicaCount above. Used only when
   ## namenodeHAEnabled is set.
-  zookeeperQuorumSize: 3
+  zookeeperQuorumSize: 1
 
   ## Override zookeeper quorum address. Zookeeper is used for determining which namenode
   ## instance is active. Separated by the comma character. Used only when
